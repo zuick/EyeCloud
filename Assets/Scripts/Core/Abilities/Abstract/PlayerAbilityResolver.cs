@@ -26,6 +26,8 @@ namespace Game.Core
             {
                 await Task.Yield();
             }
+
+
             return new PassTurn();
         }
     }

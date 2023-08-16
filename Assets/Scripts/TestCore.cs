@@ -7,12 +7,10 @@ public class TestCore : MonoBehaviour
 {
     [SerializeField] private UnityInputSystemHandler inputHandler;
 
-    [ContextMenu("DoTest")]
-    public void DoTest()
+    private LocalGame game;
+
+    public void Awake()
     {
-
-        var game = new LocalGame();
-
         var level = new Level();
 
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
@@ -24,9 +22,12 @@ public class TestCore : MonoBehaviour
         level.Add(hero);
         level.Add(enemy);
 
-        game.level = level;
-        game.currentEntity = hero;
-
+        game = new LocalGame(level, hero);
         game.Start();
+    }
+
+    private void OnDestroy()
+    {
+        game.Stop();
     }
 }
