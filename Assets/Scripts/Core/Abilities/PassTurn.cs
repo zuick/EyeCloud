@@ -4,9 +4,9 @@ namespace Game.Core
 {
     public class PassTurn : IAbility
     {
-        public void Invoke()
+        public void Invoke(Entity owner)
         {
-            Debug.Log("Pass turn");
+            Debug.Log($"{owner.Name}: Pass!");
         }
     }
 }

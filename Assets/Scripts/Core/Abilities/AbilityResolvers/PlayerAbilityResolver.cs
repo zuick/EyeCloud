@@ -27,8 +27,28 @@ namespace Game.Core
                 await Task.Yield();
             }
 
+            var delta = GetPointFromInput();
+            var targetPosition = entity.Position + delta;
+            var entityAtTargetPosition = level.GetAt(targetPosition);
+            if (entityAtTargetPosition != null)
+            {
+                return new PassTurn();
+            }
+            return new MoveTo(targetPosition);
+        }
 
-            return new PassTurn();
+        private IntPoint GetPointFromInput()
+        {
+            if (inputHandler.Left)
+                return new IntPoint(-1, 0);
+            else if (inputHandler.Right)
+                return new IntPoint(1, 0);
+            else if (inputHandler.Up)
+                return new IntPoint(0, 1);
+            else if (inputHandler.Down)
+                return new IntPoint(0, -1);
+
+            return new IntPoint(0, 0);
         }
     }
 }

@@ -22,5 +22,10 @@ namespace Game.Core
         {
             return await abilityResolver.GetAbility(this, abilities);
         }
+
+        public void SetPosition(IntPoint position)
+        {
+            Position = position;
+        }
     }
 }

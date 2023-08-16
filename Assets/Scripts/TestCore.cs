@@ -16,8 +16,8 @@ public class TestCore : MonoBehaviour
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        var hero = new Entity("Hero", 1, 1, playerAR);
-        var enemy = new Entity("Enemy", 1, 2, enemyAR);
+        var hero = new Entity("Hero", 0, 0, playerAR);
+        var enemy = new Entity("Enemy", 1, 1, enemyAR);
 
         level.Add(hero);
         level.Add(enemy);

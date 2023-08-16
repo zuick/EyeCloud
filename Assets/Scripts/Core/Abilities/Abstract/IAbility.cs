@@ -2,6 +2,6 @@
 {
     public interface IAbility
     {
-        void Invoke();
+        void Invoke(Entity owner);
     }
 }

@@ -21,7 +21,12 @@ namespace Game.Core
             return base.Equals(other);
         }
 
-        public static IntPoint operator +(IntPoint a, IntPoint b) => new IntPoint(a.X + b.Y, b.Y + b.Y);
-        public static IntPoint operator -(IntPoint a, IntPoint b) => new IntPoint(a.X - b.Y, b.Y - b.Y);
+        public static IntPoint operator +(IntPoint a, IntPoint b) => new IntPoint(a.X + b.X, a.Y + b.Y);
+        public static IntPoint operator -(IntPoint a, IntPoint b) => new IntPoint(a.X - b.X, a.Y - b.Y);
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}", X, Y);
+        }
     }
 }
