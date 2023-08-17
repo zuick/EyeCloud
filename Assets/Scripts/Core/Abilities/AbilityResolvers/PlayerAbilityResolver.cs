@@ -30,6 +30,7 @@ namespace Game.Core
             var delta = GetPointFromInput();
             var targetPosition = entity.Position + delta;
             var entityAtTargetPosition = level.GetAt(targetPosition);
+
             if (entityAtTargetPosition != null)
             {
                 return new PassTurn();
