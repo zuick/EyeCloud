@@ -23,8 +23,7 @@ namespace Game.Core
                 foreach(var entity in level.Entities)
                 {
                     Debug.Log(entity.Name + "?");
-                    var ability = await entity.NextAction();
-                    ability.Invoke(entity);
+                    await entity.NextAction();
                 }
             }
         }

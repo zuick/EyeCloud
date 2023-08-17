@@ -4,16 +4,16 @@ namespace Game.Core
 {
     public class MoveTo : IAbility
     {
-        private IntPoint position;
+        public readonly IntPoint Position;
 
         public MoveTo(IntPoint position)
         {
-            this.position = position;
+            Position = position;
         }
 
         public void Invoke(Entity owner)
         {
-            owner.SetPosition(position);
+            owner.SetPosition(Position);
             Debug.Log($"{owner.Name}: Moved to: {owner.Position}");
         }
     }

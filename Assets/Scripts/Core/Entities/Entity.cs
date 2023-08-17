@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace Game.Core
 {
@@ -7,6 +8,7 @@ namespace Game.Core
     {
         public IntPoint Position { private set; get; }
         public string Name { private set; get; }
+        public Action<IAbility> AbilityApplied;
 
         private IAbilityResolver abilityResolver;
         private List<IAbility> abilities;
@@ -18,9 +20,11 @@ namespace Game.Core
             this.abilityResolver = abilityResolver;
         }
 
-        public async Task<IAbility> NextAction()
+        public async Task NextAction()
         {
-            return await abilityResolver.GetAbility(this, abilities);
+            var ability = await abilityResolver.GetAbility(this, abilities);
+            ability.Invoke(this);
+            AbilityApplied?.Invoke(ability);
         }
 
         public void SetPosition(IntPoint position)

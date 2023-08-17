@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Game.Core;
+using Game.Visual;
 using LocalGame = Game.Core.Game;
 
 public class TestCore : MonoBehaviour
 {
     [SerializeField] private UnityInputSystemHandler inputHandler;
+    [SerializeField] private EntityActor heroActor;
+    [SerializeField] private EntityActor enemyActor;
 
     private LocalGame game;
 
-    public void Awake()
+    public void Start()
     {
         var level = new Level();
 
@@ -18,6 +21,9 @@ public class TestCore : MonoBehaviour
 
         var hero = new Entity("Hero", 0, 0, playerAR);
         var enemy = new Entity("Enemy", 1, 1, enemyAR);
+
+        heroActor.Init(hero);
+        enemyActor.Init(enemy);
 
         level.Add(hero);
         level.Add(enemy);
