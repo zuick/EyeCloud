@@ -36,3 +36,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  impactVFX: {fileID: 8973026888765058347, guid: 7ba2da84f7c00407dbd06b5f234b5968, type: 3}
+  impactVFXOffset: 0.4
