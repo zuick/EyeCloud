@@ -4,9 +4,9 @@ using Game.Core;
 
 namespace Game.Visual
 {
-    [CreateAssetMenu(fileName = "AbilityVisual", menuName = "ScriptableObjects/AbilityVisual", order = 1)]
+    [CreateAssetMenu(fileName = "AbilityVisual", menuName = "Data/Abilities Visual/AbilityVisual", order = 1)]
     public class AbilityVisual : ScriptableObject
     {
-        public virtual void Perform(EntityActor actor, object ability) { }
+        public virtual void Perform(EntityActor actor, AbilityApplyData applyData) { }
     }
 }

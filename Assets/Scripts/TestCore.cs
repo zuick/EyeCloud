@@ -14,13 +14,18 @@ public class TestCore : MonoBehaviour
 
     public void Start()
     {
+        var allAbilities = AbilityVisualResolver.Instance.GetAllAbilities();
+
         var level = new Level();
 
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        var hero = new Entity("Hero", 0, 0, playerAR);
-        var enemy = new Entity("Enemy", 1, 1, enemyAR);
+        var hero = new Entity("Hero", allAbilities, playerAR);
+        var enemy = new Entity("Enemy", allAbilities, enemyAR);
+
+        hero.SetPosition(0, 0);
+        enemy.SetPosition(1, 1);
 
         heroActor.Init(hero);
         enemyActor.Init(enemy);

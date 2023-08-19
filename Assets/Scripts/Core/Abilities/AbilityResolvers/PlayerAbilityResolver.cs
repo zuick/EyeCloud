@@ -20,7 +20,7 @@ namespace Game.Core
             this.inputHandler = inputHandler;
         }
 
-        public async Task<IAbility> GetAbility(Entity entity, List<IAbility> abilities)
+        public async Task<AbilityApplyData> GetAbility(Entity entity)
         {
             while (!inputPressed)
             {
@@ -33,9 +33,17 @@ namespace Game.Core
 
             if (entityAtTargetPosition != null)
             {
-                return new PassTurn();
+                if (entity.TryGetAbility<Pass>(out var passAbility))
+                {
+                    return new AbilityApplyData(passAbility);
+                }
             }
-            return new MoveTo(targetPosition);
+            else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
+            {
+                return new AbilityApplyData(moveToAbility, targetPosition);
+            }
+
+            return AbilityApplyData.Empty;
         }
 
         private IntPoint GetPointFromInput()

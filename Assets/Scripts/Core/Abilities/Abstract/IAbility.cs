@@ -2,6 +2,8 @@
 {
     public interface IAbility
     {
-        void Invoke(Entity owner);
+        void Apply(Entity owner, object data);
+        float Duration { get; }
+        string Name { get; }
     }
 }

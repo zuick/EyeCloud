@@ -5,6 +5,6 @@ namespace Game.Core
 {
     public interface IAbilityResolver
     {
-        public Task<IAbility> GetAbility(Entity entity, List<IAbility> abilities);
+        public Task<AbilityApplyData> GetAbility(Entity entity);
     }
 }

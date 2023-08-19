@@ -13,17 +13,25 @@ namespace Game.Core
             this.level = level;
         }
 
-        public async Task<IAbility> GetAbility(Entity entity, List<IAbility> abilities)
+        public async Task<AbilityApplyData> GetAbility(Entity entity)
         {
-            await Task.Delay(200);
             var delta = GetRandomDirectionPoint();
             var targetPosition = entity.Position + delta;
             var entityAtTargetPosition = level.GetAt(targetPosition);
+
             if (entityAtTargetPosition != null)
             {
-                return new PassTurn();
+                if (entity.TryGetAbility<Pass>(out var passAbility))
+                {
+                    return new AbilityApplyData(passAbility);
+                }
             }
-            return new MoveTo(targetPosition);
+            else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
+            {
+                return new AbilityApplyData(moveToAbility, targetPosition);
+            }
+
+            return AbilityApplyData.Empty;
         }
 
         private IntPoint GetRandomDirectionPoint()

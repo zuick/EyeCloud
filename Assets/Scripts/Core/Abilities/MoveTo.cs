@@ -2,19 +2,15 @@
 
 namespace Game.Core
 {
-    public class MoveTo : IAbility
+    [CreateAssetMenu(fileName = "Ability", menuName = "Data/Abilities/MoveTo", order = 1)]
+    public class MoveTo : Ability
     {
-        public readonly IntPoint Position;
-
-        public MoveTo(IntPoint position)
+        public override void Apply(Entity owner, object data)
         {
-            Position = position;
-        }
-
-        public void Invoke(Entity owner)
-        {
-            owner.SetPosition(Position);
-            Debug.Log($"{owner.Name}: Moved to: {owner.Position}");
+            if(data is IntPoint position)
+            {
+                owner.SetPosition(position);
+            }
         }
     }
 }

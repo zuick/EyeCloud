@@ -18,11 +18,14 @@ namespace Game.Visual
             entity.AbilityApplied += OnAbilityApplied;
         }
 
-        protected virtual void OnAbilityApplied(IAbility ability)
+        protected virtual void OnAbilityApplied(AbilityApplyData applyData)
         {
-            if (AbilityVisualResolver.Instance.TryGet(ability, out var visual))
+            if(applyData.Ability is Ability abilitySO)
             {
-                visual.Perform(this, ability);
+                if (AbilityVisualResolver.Instance.TryGet(abilitySO, out var visual))
+                {
+                    visual.Perform(this, applyData);
+                }
             }
         }
 

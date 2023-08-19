@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
 
@@ -6,8 +8,14 @@ namespace Game.Visual
 {
     public class AbilityVisualResolver : MonoBehaviour
     {
-        [SerializeField] private AbilityVisual moveTo;
-        [SerializeField] private AbilityVisual pass;
+        [Serializable]
+        public class AbilityKeyPair
+        {
+            public Ability Ability;
+            public AbilityVisual Visual;
+        }
+
+        [SerializeField] private List<AbilityKeyPair> abilityToVisual;
 
         public static AbilityVisualResolver Instance;
 
@@ -16,22 +24,22 @@ namespace Game.Visual
             Instance = this;
         }
 
-        public bool TryGet(IAbility ability, out AbilityVisual visual)
+        public bool TryGet(Ability ability, out AbilityVisual visual)
         {
             visual = null;
-
-            if (ability is MoveTo)
+            var candidate = abilityToVisual.FirstOrDefault(p => p.Ability == ability);
+            if (candidate != null)
             {
-                visual = moveTo;
-                return true;
-            }
-            else if (ability is PassTurn)
-            {
-                visual = pass;
+                visual = candidate.Visual;
                 return true;
             }
 
             return false;
+        }
+
+        public List<IAbility> GetAllAbilities()
+        {
+            return abilityToVisual.Select(p => (IAbility)p.Ability).ToList();
         }
     }
 }
