@@ -16,11 +16,14 @@ namespace Game.Visual
             transform.position = VisualConfig.ToWorld(entity.Position);
 
             entity.AbilityApplied += OnAbilityApplied;
+            entity.StatsChanged += OnStatsChanged;
+
+            RefreshScale();
         }
 
         protected virtual void OnAbilityApplied(AbilityApplyData applyData)
         {
-            if(applyData.Ability is Ability abilitySO)
+            if (applyData.Ability is Ability abilitySO)
             {
                 if (AbilityVisualResolver.Instance.TryGet(abilitySO, out var visual))
                 {
@@ -29,9 +32,20 @@ namespace Game.Visual
             }
         }
 
+        protected virtual void OnStatsChanged(EntityStats oldStats, EntityStats newStats)
+        {
+            RefreshScale();
+        }
+
+        protected void RefreshScale()
+        {
+            transform.localScale = Vector3.one * ((float)entity.Stats.HP / (float)entity.Stats.MaxHP);
+        }
+
         protected virtual void OnDestroy()
         {
             entity.AbilityApplied -= OnAbilityApplied;
+            entity.StatsChanged -= OnStatsChanged;
         }
     }
 }

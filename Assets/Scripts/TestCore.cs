@@ -1,31 +1,30 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Game.Core;
+using Game.Data;
 using Game.Visual;
 using LocalGame = Game.Core.Game;
 
 public class TestCore : MonoBehaviour
 {
     [SerializeField] private UnityInputSystemHandler inputHandler;
+
     [SerializeField] private EntityActor heroActor;
     [SerializeField] private EntityActor enemyActor;
+
+    [SerializeField] private EntityData heroData;
+    [SerializeField] private EntityData enemyData;
 
     private LocalGame game;
 
     public void Start()
     {
-        var allAbilities = AbilityVisualResolver.Instance.GetAllAbilities();
-
         var level = new Level();
 
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        var hero = new Entity("Hero", allAbilities, playerAR);
-        var enemy = new Entity("Enemy", allAbilities, enemyAR);
-
-        hero.SetPosition(0, 0);
-        enemy.SetPosition(1, 1);
+        var hero = heroData.Create(0, 0, playerAR);
+        var enemy = enemyData.Create(1, 1, enemyAR);
 
         heroActor.Init(hero);
         enemyActor.Init(enemy);

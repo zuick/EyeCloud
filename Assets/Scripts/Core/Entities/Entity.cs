@@ -8,9 +8,12 @@ namespace Game.Core
 {
     public class Entity
     {
-        public IntPoint Position { private set; get; }
         public string Name { private set; get; }
+        public IntPoint Position { private set; get; }
+        public EntityStats Stats { private set; get; }
+
         public Action<AbilityApplyData> AbilityApplied;
+        public Action<EntityStats, EntityStats> StatsChanged;
 
         private IAbilityResolver abilityResolver;
         private List<IAbility> abilities;
@@ -47,6 +50,14 @@ namespace Game.Core
         {
             ability = abilities.FirstOrDefault(a => a is T);
             return ability != null;
+        }
+
+        public void SetStats(EntityStats newValues)
+        {
+            var oldValues = Stats;
+            newValues.HP = Mathf.Clamp(newValues.HP, 0, newValues.MaxHP);
+            Stats = newValues;
+            StatsChanged?.Invoke(oldValues, newValues);
         }
 
         public void SetPosition(IntPoint position)

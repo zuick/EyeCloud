@@ -33,7 +33,11 @@ namespace Game.Core
 
             if (entityAtTargetPosition != null)
             {
-                if (entity.TryGetAbility<Pass>(out var passAbility))
+                if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
+                {
+                    return new AbilityApplyData(attackAbility, entityAtTargetPosition);
+                }
+                else if (entity.TryGetAbility<Pass>(out var passAbility))
                 {
                     return new AbilityApplyData(passAbility);
                 }
