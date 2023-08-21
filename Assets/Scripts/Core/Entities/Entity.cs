@@ -9,8 +9,10 @@ namespace Game.Core
     public class Entity
     {
         public string Name { private set; get; }
+        public int Id { private set; get; }
         public IntPoint Position { private set; get; }
         public EntityStats Stats { private set; get; }
+        public bool IsDestroyed { private set; get; }
 
         public Action<AbilityApplyData> AbilityApplied;
         public Action<EntityStats, EntityStats> StatsChanged;
@@ -18,8 +20,9 @@ namespace Game.Core
         private IAbilityResolver abilityResolver;
         private List<IAbility> abilities;
 
-        public Entity(string name, List<IAbility> abilities, IAbilityResolver abilityResolver)
+        public Entity(int id, string name, List<IAbility> abilities, IAbilityResolver abilityResolver)
         {
+            Id = id;
             Name = name;
             this.abilities = abilities;
             this.abilityResolver = abilityResolver;
@@ -57,6 +60,10 @@ namespace Game.Core
             var oldValues = Stats;
             newValues.HP = Mathf.Clamp(newValues.HP, 0, newValues.MaxHP);
             Stats = newValues;
+
+            if (newValues.HP <= 0)
+                IsDestroyed = true;
+
             StatsChanged?.Invoke(oldValues, newValues);
         }
 

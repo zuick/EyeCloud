@@ -18,13 +18,13 @@ namespace Game.Core
 
         public async void Start()
         {
-            while (!stopped)
+            Entity currentEntity = null;
+            while (level.Entities.Count > 0 && !stopped)
             {
-                foreach(var entity in level.Entities)
-                {
-                    Debug.Log(entity.Name + "?");
-                    await entity.NextAction();
-                }
+                currentEntity = level.GetNext(currentEntity);
+                Debug.Log(currentEntity.Name + "?");
+                await currentEntity.NextAction();
+                level.RemoveDestroyed();
             }
         }
 

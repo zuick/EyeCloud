@@ -7,6 +7,7 @@ namespace Game.Visual
     public class EntityActor : MonoBehaviour
     {
         public IntPoint EntityPosition => entity.Position;
+        [SerializeField] private GameObject DestroyFX;
 
         private Entity entity;
 
@@ -35,6 +36,14 @@ namespace Game.Visual
         protected virtual void OnStatsChanged(EntityStats oldStats, EntityStats newStats)
         {
             RefreshScale();
+            if (entity.IsDestroyed)
+            {
+                Destroy(gameObject);
+                if (DestroyFX != null)
+                {
+                    Instantiate(DestroyFX, transform.position, transform.rotation);
+                }
+            }
         }
 
         protected void RefreshScale()

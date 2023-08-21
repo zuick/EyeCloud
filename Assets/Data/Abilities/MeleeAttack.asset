@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MeleeAttack
   m_EditorClassIdentifier: 
   duration: 0.2
-  hitPoints: 25
+  hitPoints: 50
