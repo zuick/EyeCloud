@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 42eb1c8741fae4578af0ecb1370e5e5d, type: 2}
   - {fileID: 11400000, guid: 51c7fd4c1776c444a9e14eef17ec1ec6, type: 2}
   Stats:
-    HP: 100
-    MaxHP: 100
+    HP: 200
+    MaxHP: 200
     AttackMultiplier: 1
+    SightDistance: 0
