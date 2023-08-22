@@ -12,10 +12,11 @@ namespace Game.Data
         public List<Ability> Abilities;
         public EntityStats Stats;
 
-        public Entity Create(int id, int x, int y, IAbilityResolver abilityResolver)
+        public Entity Create(int id, int fractionId, int x, int y, IAbilityResolver abilityResolver)
         {
             var entity = new Entity(
                 id,
+                fractionId,
                 Name,
                 Abilities.Select(a => (IAbility)a).ToList(),
                 abilityResolver

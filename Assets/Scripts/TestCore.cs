@@ -25,10 +25,10 @@ public class TestCore : MonoBehaviour
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        var hero = Create(-1, -1, heroActorPrefab, heroData, playerAR);
-        var hero2 = Create(1, 1, heroActorPrefab, heroData, playerAR);
-        var enemy1 = Create(0, 0, enemyActorPrefab, heroData, enemyAR);
-        var enemy2 = Create(2, 2, enemyActorPrefab, heroData, enemyAR);
+        var hero = Create(-2, -2, 0, heroActorPrefab, heroData, playerAR);
+        var hero2 = Create(-1, -1, 0, heroActorPrefab, heroData, playerAR);
+        var enemy1 = Create(2, 2, 1, enemyActorPrefab, enemyData, enemyAR);
+        var enemy2 = Create(3, 3, 1, enemyActorPrefab, enemyData, enemyAR);
 
         level.Add(hero);
         level.Add(hero2);
@@ -39,9 +39,9 @@ public class TestCore : MonoBehaviour
         game.Start();
     }
 
-    private Entity Create(int x, int y, EntityActor actorPrefab, EntityData data, IAbilityResolver abilityResolver)
+    private Entity Create(int x, int y, int fractionId, EntityActor actorPrefab, EntityData data, IAbilityResolver abilityResolver)
     {
-        var entity = data.Create(maxId, x, y, abilityResolver);
+        var entity = data.Create(maxId, fractionId, x, y, abilityResolver);
         var actor = Instantiate(actorPrefab, actorsPivot, false);
         actor.Init(entity);
         maxId++;

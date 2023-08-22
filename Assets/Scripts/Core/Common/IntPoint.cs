@@ -1,3 +1,5 @@
+using System;
+
 namespace Game.Core
 {
     public struct IntPoint
@@ -27,6 +29,23 @@ namespace Game.Core
         public override string ToString()
         {
             return string.Format("{0}, {1}", X, Y);
+        }
+
+        public int MaxDistanceTo(IntPoint other)
+        {
+            var direction = other - this;
+            var x = Math.Abs(direction.X);
+            var y = Math.Abs(direction.Y);
+            return Math.Max(x, y);
+        }
+
+        public IntPoint UnitDirection()
+        {
+            if (Math.Abs(X) > Math.Abs(Y))
+            {
+                return new IntPoint(Math.Sign(X), 0);
+            }
+            return new IntPoint(0, Math.Sign(Y));
         }
     }
 }

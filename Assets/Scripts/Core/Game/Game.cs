@@ -22,7 +22,7 @@ namespace Game.Core
             while (level.Entities.Count > 0 && !stopped)
             {
                 currentEntity = level.GetNext(currentEntity);
-                Debug.Log(currentEntity.Name + "?");
+                Debug.Log($"{currentEntity.Name}({currentEntity.Id}/{currentEntity.FractionId})?");
                 await currentEntity.NextAction();
                 level.RemoveDestroyed();
             }

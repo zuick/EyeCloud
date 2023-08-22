@@ -666,6 +666,7 @@ MonoBehaviour:
   rightAction: {fileID: 2799922221189385683, guid: 6e90f422cca3142cf9a8e51f563a0a11, type: 3}
   upAction: {fileID: -7305774065569961056, guid: 6e90f422cca3142cf9a8e51f563a0a11, type: 3}
   downAction: {fileID: 6577388119256690056, guid: 6e90f422cca3142cf9a8e51f563a0a11, type: 3}
+  passTurnAction: {fileID: -5140442675732450069, guid: 6e90f422cca3142cf9a8e51f563a0a11, type: 3}
 --- !u!1 &1552374570
 GameObject:
   m_ObjectHideFlags: 0

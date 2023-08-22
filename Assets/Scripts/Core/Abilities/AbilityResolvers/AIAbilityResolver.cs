@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Core
 {
-    public class AIAbilityResolver : IAbilityResolver
+    public class AIAbilityResolver : AbilityResolver
     {
         private Level level;
 
@@ -13,17 +13,28 @@ namespace Game.Core
             this.level = level;
         }
 
-        public async Task<AbilityApplyData> GetAbility(Entity entity)
+        public override async Task<AbilityApplyData> GetAbility(Entity entity)
         {
-            var delta = GetRandomDirectionPoint();
+            var nearestTarget = GetNearestTarget(entity);
+            IntPoint delta;
+            if (nearestTarget != null)
+            {
+                delta = (nearestTarget.Position - entity.Position).UnitDirection();
+            }
+            else
+            {
+                delta = GetRandomDirectionPoint();
+            }
+
             var targetPosition = entity.Position + delta;
             var entityAtTargetPosition = level.GetAt(targetPosition);
 
             if (entityAtTargetPosition != null)
             {
-                if (entity.TryGetAbility<Pass>(out var passAbility))
+                if (entity.FractionId != entityAtTargetPosition.FractionId &&
+                    entity.TryGetAbility<MeleeAttack>(out var attackAbility))
                 {
-                    return new AbilityApplyData(passAbility);
+                    return new AbilityApplyData(attackAbility, entityAtTargetPosition);
                 }
             }
             else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
@@ -31,7 +42,7 @@ namespace Game.Core
                 return new AbilityApplyData(moveToAbility, targetPosition);
             }
 
-            return AbilityApplyData.Empty;
+            return GetPassAbility(entity);
         }
 
         private IntPoint GetRandomDirectionPoint()
@@ -45,6 +56,14 @@ namespace Game.Core
                 return new IntPoint(0, 1);
 
             return new IntPoint(0, -1);
+        }
+
+        private Entity GetNearestTarget(Entity searcher)
+        {
+            return level.Get(
+                e => e.FractionId != searcher.FractionId &&
+                searcher.Position.MaxDistanceTo(e.Position) <= searcher.Stats.SightDistance
+            );
         }
     }
 }

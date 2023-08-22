@@ -1,5 +1,5 @@
+using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
@@ -59,6 +59,11 @@ namespace Game.Core
         public Entity GetAt(IntPoint position)
         {
             return Entities.Values.FirstOrDefault(e => e.Position.Equals(position));
+        }
+
+        public Entity Get(Func<Entity, bool> predicate)
+        {
+            return Entities.Values.FirstOrDefault(predicate);
         }
     }
 }

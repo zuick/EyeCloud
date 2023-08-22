@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Game.Core
 {
-    public class PlayerAbilityResolver : IAbilityResolver
+    public class PlayerAbilityResolver : AbilityResolver
     {
         private Level level;
         private IInputHandler inputHandler;
@@ -12,7 +12,8 @@ namespace Game.Core
             inputHandler.Left ||
             inputHandler.Right ||
             inputHandler.Up ||
-            inputHandler.Down;
+            inputHandler.Down ||
+            inputHandler.PassTurn;
 
         public PlayerAbilityResolver(Level level, IInputHandler inputHandler)
         {
@@ -20,34 +21,33 @@ namespace Game.Core
             this.inputHandler = inputHandler;
         }
 
-        public async Task<AbilityApplyData> GetAbility(Entity entity)
+        public override async Task<AbilityApplyData> GetAbility(Entity entity)
         {
             while (!inputPressed)
             {
                 await Task.Yield();
             }
 
-            var delta = GetPointFromInput();
-            var targetPosition = entity.Position + delta;
-            var entityAtTargetPosition = level.GetAt(targetPosition);
-
-            if (entityAtTargetPosition != null)
+            if (!inputHandler.PassTurn)
             {
-                if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
+                var delta = GetPointFromInput();
+                var targetPosition = entity.Position + delta;
+                var entityAtTargetPosition = level.GetAt(targetPosition);
+
+                if (entityAtTargetPosition != null)
                 {
-                    return new AbilityApplyData(attackAbility, entityAtTargetPosition);
+                    if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
+                    {
+                        return new AbilityApplyData(attackAbility, entityAtTargetPosition);
+                    }
                 }
-                else if (entity.TryGetAbility<Pass>(out var passAbility))
+                else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
                 {
-                    return new AbilityApplyData(passAbility);
+                    return new AbilityApplyData(moveToAbility, targetPosition);
                 }
             }
-            else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
-            {
-                return new AbilityApplyData(moveToAbility, targetPosition);
-            }
 
-            return AbilityApplyData.Empty;
+            return GetPassAbility(entity);
         }
 
         private IntPoint GetPointFromInput()

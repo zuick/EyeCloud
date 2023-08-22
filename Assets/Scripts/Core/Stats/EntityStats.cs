@@ -8,5 +8,6 @@ namespace Game.Core
         public int HP;
         public int MaxHP;
         public float AttackMultiplier;
+        public int SightDistance;
     }
 }

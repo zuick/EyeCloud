@@ -8,5 +8,6 @@ namespace Game.Core
         public bool Left { get; }
         public bool Up { get; }
         public bool Down { get; }
+        public bool PassTurn { get; }
     }
 }

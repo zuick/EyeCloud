@@ -13,6 +13,7 @@ namespace Game.Core
         public IntPoint Position { private set; get; }
         public EntityStats Stats { private set; get; }
         public bool IsDestroyed { private set; get; }
+        public int FractionId { private set; get; }
 
         public Action<AbilityApplyData> AbilityApplied;
         public Action<EntityStats, EntityStats> StatsChanged;
@@ -20,10 +21,11 @@ namespace Game.Core
         private IAbilityResolver abilityResolver;
         private List<IAbility> abilities;
 
-        public Entity(int id, string name, List<IAbility> abilities, IAbilityResolver abilityResolver)
+        public Entity(int id, int fractionId, string name, List<IAbility> abilities, IAbilityResolver abilityResolver)
         {
             Id = id;
             Name = name;
+            FractionId = fractionId;
             this.abilities = abilities;
             this.abilityResolver = abilityResolver;
         }
