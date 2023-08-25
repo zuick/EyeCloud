@@ -11,7 +11,6 @@ namespace Game.Visual
         public void Init(LevelData levelData)
         {
             var scale = VisualConfig.Instance.GridScale;
-            var excents = new Vector2(levelData.MapSize.X * scale / 2f, levelData.MapSize.Y * scale / 2f);
 
             for (var i = 0; i < levelData.MapSize.Y; i++)
             {
@@ -20,11 +19,7 @@ namespace Game.Visual
                     if (levelData.Map[i, j] == MapCellType.Block)
                         continue;
 
-                    var position = new Vector3(
-                        j * VisualConfig.Instance.GridScale - excents.x,
-                        transform.position.y,
-                        i * VisualConfig.Instance.GridScale - excents.y
-                    );
+                    var position = new Vector3(j * scale, transform.position.y, i * scale);
 
                     var instance = Instantiate(mapCellPrefab, position, transform.rotation);
                     instance.transform.SetParent(transform, false);
