@@ -6,7 +6,7 @@ namespace Game.Core
 {
     public class Map
     {
-        private MapCell[][] data;
+        private MapCellType[][] data;
 
         public Map(int sizeX, int sizeY)
         {
@@ -14,21 +14,9 @@ namespace Game.Core
             {
                 for (int j = 0; j < sizeY; j++)
                 {
-                    data[i][j] = new MapCell();
+                    data[i][j] = MapCellType.Empty;
                 }
             }
-        }
-
-        public bool TryGet(IntPoint pos, out MapCell result)
-        {
-            result = null;
-            if (pos.X < data.Length && pos.Y < data[pos.X].Length)
-            {
-                result = data[pos.X][pos.Y];
-                return true;
-            }
-
-            return false;
         }
     }
 }

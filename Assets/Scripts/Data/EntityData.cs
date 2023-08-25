@@ -5,7 +5,7 @@ using Game.Core;
 
 namespace Game.Data
 {
-    [CreateAssetMenu(fileName = "EntityData", menuName = "Data/Entities/EntityData", order = 1)]
+    [CreateAssetMenu(fileName = "EntityData", menuName = "Data/EntityData", order = 1)]
     public class EntityData : ScriptableObject
     {
         public string Name;

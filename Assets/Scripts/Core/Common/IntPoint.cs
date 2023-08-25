@@ -2,6 +2,7 @@ using System;
 
 namespace Game.Core
 {
+    [Serializable]
     public struct IntPoint
     {
         public int X;

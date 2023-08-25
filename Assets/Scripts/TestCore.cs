@@ -15,11 +15,16 @@ public class TestCore : MonoBehaviour
     [SerializeField] private EntityData heroData;
     [SerializeField] private EntityData enemyData;
 
+    [SerializeField] private LevelView levelView;
+    [SerializeField] private LevelData levelData;
+
     private LocalGame game;
     private int maxId;
 
     public void Start()
     {
+        levelView.Init(levelData);
+
         var level = new Level();
 
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
