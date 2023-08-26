@@ -8,7 +8,13 @@ namespace Game.Core
 {
     public class Level
     {
-        public SortedList<int, Entity> Entities = new();
+        public SortedList<int, Entity> Entities = new(); // TODO: private?
+        private MapCellType[,] map;
+
+        public Level(MapCellType[,] map)
+        {
+            this.map = map;
+        }
 
         public void Add(Entity entity)
         {
@@ -59,6 +65,33 @@ namespace Game.Core
         public Entity GetAt(IntPoint position)
         {
             return Entities.Values.FirstOrDefault(e => e.Position.Equals(position));
+        }
+
+        public bool IsFree(IntPoint position)
+        {
+            if (position.X < 0 || position.X >= map.GetLength(0))
+            {
+                return false;
+            }
+            else if (position.Y < 0 || position.Y >= map.GetLength(1))
+            {
+                return false;
+            }
+
+            return map[position.Y, position.X] == MapCellType.Empty;
+        }
+
+        public IntPoint[] GetFreePositionsAround(IntPoint position)
+        {
+            var positionsAround = new IntPoint[]
+            {
+                position + new IntPoint(0, 1),
+                position + new IntPoint(0, -1),
+                position + new IntPoint(1, 0),
+                position + new IntPoint(-1, 0),
+            };
+
+            return positionsAround.Where(IsFree).ToArray();
         }
 
         public Entity Get(Func<Entity, bool> predicate)

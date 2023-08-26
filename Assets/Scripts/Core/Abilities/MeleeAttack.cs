@@ -12,8 +12,8 @@ namespace Game.Core
             if(data is Entity target)
             {
                 var stats = target.Stats;
-                var finalHitPoints = (int)owner.Stats.AttackMultiplier * hitPoints;
-                stats.HP -= finalHitPoints;
+                var finalHitPoints = owner.Stats.AttackMultiplier * hitPoints;
+                stats.HP -= (int)finalHitPoints;
                 target.SetStats(stats);
             }
         }

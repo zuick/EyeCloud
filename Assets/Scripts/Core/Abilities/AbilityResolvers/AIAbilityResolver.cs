@@ -16,17 +16,18 @@ namespace Game.Core
         public override async Task<AbilityApplyData> GetAbility(Entity entity)
         {
             var nearestTarget = GetNearestTarget(entity);
-            IntPoint delta;
+            var targetPosition = GetRandomPointAround(entity.Position);
+
             if (nearestTarget != null)
             {
-                delta = (nearestTarget.Position - entity.Position).UnitDirection();
-            }
-            else
-            {
-                delta = GetRandomDirectionPoint();
+                var targetDirection = (nearestTarget.Position - entity.Position).UnitDirection();
+                var targetPositionCandidate = entity.Position + targetDirection;
+                if (level.IsFree(targetPositionCandidate))
+                {
+                    targetPosition = targetPositionCandidate;
+                }
             }
 
-            var targetPosition = entity.Position + delta;
             var entityAtTargetPosition = level.GetAt(targetPosition);
 
             if (entityAtTargetPosition != null)
@@ -45,17 +46,10 @@ namespace Game.Core
             return GetPassAbility(entity);
         }
 
-        private IntPoint GetRandomDirectionPoint()
+        private IntPoint GetRandomPointAround(IntPoint position)
         {
-            var r = Random.Range(0, 5);
-            if (r == 0)
-                return new IntPoint(-1, 0);
-            else if (r == 1)
-                return new IntPoint(1, 0);
-            else if (r == 2)
-                return new IntPoint(0, 1);
-
-            return new IntPoint(0, -1);
+            var freePositions = level.GetFreePositionsAround(position);
+            return freePositions[Random.Range(0, freePositions.Length)];
         }
 
         private Entity GetNearestTarget(Entity searcher)

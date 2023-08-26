@@ -22,12 +22,12 @@ public class TestCore : MonoBehaviour
     {
         levelView.Init(levelData);
 
-        var level = new Level();
+        var level = new Level(levelData.Map);
 
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        var orderedEntities = levelData.Entities.OrderByDescending(d => (int)d.entityData.Fraction);
+        var orderedEntities = levelData.Entities.OrderBy(d => (int)d.entityData.Fraction);
 
         foreach (var entityPositionData in orderedEntities)
         {

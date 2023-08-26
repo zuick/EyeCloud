@@ -32,6 +32,12 @@ namespace Game.Core
             {
                 var delta = GetPointFromInput();
                 var targetPosition = entity.Position + delta;
+
+                if (!level.IsFree(targetPosition))
+                {
+                    return GetPassAbility(entity); // TODO: wait for other input
+                }
+
                 var entityAtTargetPosition = level.GetAt(targetPosition);
 
                 if (entityAtTargetPosition != null)

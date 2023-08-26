@@ -36,6 +36,11 @@ namespace Game.Visual
                 timer += Time.deltaTime;
 
                 await Task.Yield();
+
+                if (actor == null)
+                {
+                    return;
+                }
             }
 
             actor.transform.localPosition = targetPosition;
