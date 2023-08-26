@@ -22,5 +22,11 @@ MonoBehaviour:
   entityToActor:
   - Data: {fileID: 11400000, guid: eed505b81f8a44c37a4b4c6a8f6d8268, type: 2}
     Actor: {fileID: 8021202594414762322, guid: 79469128759c0487eb2516827a0ed379, type: 3}
+  - Data: {fileID: 11400000, guid: b38e54e0db292414aa6823e0d23c0660, type: 2}
+    Actor: {fileID: 3430978747543337058, guid: de1c9f5e7a3f74dc28c62801e4f0d3b5, type: 3}
+  - Data: {fileID: 11400000, guid: 81305264c9cfe4b438786f7fd6efbad1, type: 2}
+    Actor: {fileID: 1262578580881458033, guid: 7bab5149aeda44400b07c50478248289, type: 3}
   - Data: {fileID: 11400000, guid: d42733d929efc4724bd3d05709535749, type: 2}
     Actor: {fileID: 4492499410923560211, guid: 330689ba7398f4b99a006d16ba0c0d7c, type: 3}
+  - Data: {fileID: 11400000, guid: bef4a1b046cad4a5196f6e7bfd873831, type: 2}
+    Actor: {fileID: 3114680093676579302, guid: 16fc9aa7da8ec45ff8b9a8df73074051, type: 3}

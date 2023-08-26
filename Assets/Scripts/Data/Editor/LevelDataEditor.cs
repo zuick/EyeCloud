@@ -100,7 +100,7 @@ namespace Game.Data
                         : Color.white;
 
                     var entitesOnCell = levelData.Entities
-                        .Where(e => e.entityData != null && e.position.X == i && e.position.Y == j)
+                        .Where(e => e.entityData != null && e.position.Y == i && e.position.X == j)
                         .Select(e => e.entityData.name);
 
                     var caption = string.Join("\n", entitesOnCell);

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CrossPlatformWireframe-Glow Red
+  m_Name: WireframeBlue
   m_Shader: {fileID: -6465566751694194690, guid: 32ab4869208d946e48db9e2548ff2d06, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -36,9 +36,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Wireframe_Thickness: 1
+    - _Wireframe_Thickness: 0.2
     m_Colors:
-    - _Wireframe_Color: {r: 22.663393, g: 0.5932824, b: 1.0211295, a: 0}
+    - _Wireframe_Color: {r: 0.518383, g: 4.7961836, b: 9.990655, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4168685087526108975
 MonoBehaviour:

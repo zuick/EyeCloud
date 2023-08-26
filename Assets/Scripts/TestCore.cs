@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using System.Linq;
 using Game.Core;
 using Game.Data;
 using Game.Visual;
 using LocalGame = Game.Core.Game;
+using System;
 
 public class TestCore : MonoBehaviour
 {
+    [SerializeField] private InputActionReference restartAction;
     [SerializeField] private UnityInputSystemHandler inputHandler;
     [SerializeField] private VisualResolver visualResolver; // TODO: inject via Zenject
 
@@ -49,6 +53,13 @@ public class TestCore : MonoBehaviour
 
         game = new LocalGame(level);
         game.Start();
+
+        restartAction.action.performed += OnRestart;
+    }
+
+    private void OnRestart(InputAction.CallbackContext ctx)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     //TODO: IAbilityResolver to EntityData
@@ -63,5 +74,6 @@ public class TestCore : MonoBehaviour
     private void OnDestroy()
     {
         game.Stop();
+        restartAction.action.performed -= OnRestart;
     }
 }
