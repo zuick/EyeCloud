@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   Name: Enemy
+  Fraction: 1
   Abilities:
   - {fileID: 11400000, guid: 42eb1c8741fae4578af0ecb1370e5e5d, type: 2}
   - {fileID: 11400000, guid: 8efe582237c8144a88cc4fb5fa2dc7b2, type: 2}

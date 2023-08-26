@@ -8,13 +8,13 @@ namespace Game.Visual
     {
         public IntPoint EntityPosition => entity.Position;
         [SerializeField] private GameObject DestroyFX;
-
+        [SerializeField] private VisualResolver visualResolver; // TODO: inject via Zenject
         private Entity entity;
 
         public virtual void Init(Entity entity)
         {
             this.entity = entity;
-            transform.position = VisualConfig.ToWorld(entity.Position);
+            transform.localPosition = VisualConfig.ToWorld(entity.Position);
 
             entity.AbilityApplied += OnAbilityApplied;
             entity.StatsChanged += OnStatsChanged;
@@ -26,7 +26,7 @@ namespace Game.Visual
         {
             if (applyData.Ability is Ability abilitySO)
             {
-                if (AbilityVisualResolver.Instance.TryGet(abilitySO, out var visual))
+                if (visualResolver.TryGet(abilitySO, out var visual))
                 {
                     visual.Perform(this, applyData);
                 }

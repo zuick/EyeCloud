@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 19356848}
   - component: {fileID: 19356847}
-  - component: {fileID: 19356846}
   m_Layer: 0
   m_Name: Services
   m_TagString: Untagged
@@ -141,25 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &19356846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19356845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8ad046d1fa064c2283bc302a7cf90aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityToVisual:
-  - Ability: {fileID: 11400000, guid: 42eb1c8741fae4578af0ecb1370e5e5d, type: 2}
-    Visual: {fileID: 11400000, guid: 402cedb9dbd214423b74b4a02b810a90, type: 2}
-  - Ability: {fileID: 11400000, guid: 8efe582237c8144a88cc4fb5fa2dc7b2, type: 2}
-    Visual: {fileID: 11400000, guid: fa365e8b7a71e42e286879e32a69d22c, type: 2}
-  - Ability: {fileID: 11400000, guid: 51c7fd4c1776c444a9e14eef17ec1ec6, type: 2}
-    Visual: {fileID: 11400000, guid: 5c829c56b636c43f6b81757554341310, type: 2}
 --- !u!114 &19356847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapCellPrefab: {fileID: 1898358062966263162, guid: 95178575a5abc49dda0beb2a377aad9f, type: 3}
+  mapCellsPivot: {fileID: 293240706}
 --- !u!4 &183008195
 Transform:
   m_ObjectHideFlags: 0
@@ -226,12 +207,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183008193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 189219053}
+  - {fileID: 293240706}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &189219052
 GameObject:
@@ -256,12 +239,43 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189219052}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 183008195}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &293240705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293240706}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &293240706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293240705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 183008195}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &449569211
@@ -493,14 +507,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
   m_LocalPosition: {x: 0, y: 7, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 449569212}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,11 +658,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 1250019122}
+  visualResolver: {fileID: 11400000, guid: 4e195a97af6ef4331b51dffb3b350615, type: 2}
   actorsPivot: {fileID: 189219053}
-  heroActorPrefab: {fileID: 4492499410923560211, guid: 330689ba7398f4b99a006d16ba0c0d7c, type: 3}
-  enemyActorPrefab: {fileID: 740082667, guid: 79469128759c0487eb2516827a0ed379, type: 3}
-  heroData: {fileID: 11400000, guid: d42733d929efc4724bd3d05709535749, type: 2}
-  enemyData: {fileID: 11400000, guid: eed505b81f8a44c37a4b4c6a8f6d8268, type: 2}
   levelView: {fileID: 183008194}
   levelData: {fileID: 11400000, guid: 87636a32de36740359ac7b708be4fbd4, type: 2}
 --- !u!4 &1552374572

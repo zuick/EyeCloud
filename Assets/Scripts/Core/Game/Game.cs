@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core
@@ -7,13 +5,11 @@ namespace Game.Core
     public class Game
     {
         public Level level;
-        public Entity currentEntity;
         private bool stopped;
 
-        public Game(Level level, Entity currentEntity)
+        public Game(Level level)
         {
             this.level = level;
-            this.currentEntity = currentEntity;
         }
 
         public async void Start()

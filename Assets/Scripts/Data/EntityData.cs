@@ -9,20 +9,21 @@ namespace Game.Data
     public class EntityData : ScriptableObject
     {
         public string Name;
+        public EntityFraction Fraction;
         public List<Ability> Abilities;
         public EntityStats Stats;
 
-        public Entity Create(int id, int fractionId, int x, int y, IAbilityResolver abilityResolver)
+        public Entity Create(int id, IntPoint position, IAbilityResolver abilityResolver)
         {
             var entity = new Entity(
                 id,
-                fractionId,
+                (int)Fraction,
                 Name,
                 Abilities.Select(a => (IAbility)a).ToList(),
                 abilityResolver
             );
 
-            entity.SetPosition(x, y);
+            entity.SetPosition(position);
             entity.SetStats(Stats);
             return entity;
         }

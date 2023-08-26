@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d561a22efcd3e46c39bcb5c6fba7bdb3, type: 3}
+  m_Name: VisualResolver
+  m_EditorClassIdentifier: 
+  abilityToVisual:
+  - Ability: {fileID: 11400000, guid: 51c7fd4c1776c444a9e14eef17ec1ec6, type: 2}
+    Visual: {fileID: 11400000, guid: 5c829c56b636c43f6b81757554341310, type: 2}
+  - Ability: {fileID: 11400000, guid: 8efe582237c8144a88cc4fb5fa2dc7b2, type: 2}
+    Visual: {fileID: 11400000, guid: fa365e8b7a71e42e286879e32a69d22c, type: 2}
+  - Ability: {fileID: 11400000, guid: 42eb1c8741fae4578af0ecb1370e5e5d, type: 2}
+    Visual: {fileID: 11400000, guid: 402cedb9dbd214423b74b4a02b810a90, type: 2}
+  entityToActor:
+  - Data: {fileID: 11400000, guid: eed505b81f8a44c37a4b4c6a8f6d8268, type: 2}
+    Actor: {fileID: 740082667, guid: 79469128759c0487eb2516827a0ed379, type: 3}
+  - Data: {fileID: 11400000, guid: d42733d929efc4724bd3d05709535749, type: 2}
+    Actor: {fileID: 4492499410923560211, guid: 330689ba7398f4b99a006d16ba0c0d7c, type: 3}

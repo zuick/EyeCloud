@@ -20,9 +20,9 @@ namespace Game.Visual
 
         protected async void DoPerform(EntityActor actor, float duration, IntPoint position, Action onFinish = null)
         {
-            var initialPosition = actor.transform.position;
+            var initialPosition = actor.transform.localPosition;
             var targetPosition = VisualConfig.ToWorld(position);
-            var worldDelta = targetPosition - actor.transform.position;
+            var worldDelta = targetPosition - actor.transform.localPosition;
             var timer = 0f;
 
             actor.transform.rotation = Quaternion.LookRotation(worldDelta, Vector3.up);
@@ -31,14 +31,14 @@ namespace Game.Visual
             {
                 var t = timer / duration;
 
-                actor.transform.position = initialPosition + worldDelta * movingCurve.Evaluate(t);
+                actor.transform.localPosition = initialPosition + worldDelta * movingCurve.Evaluate(t);
 
                 timer += Time.deltaTime;
 
                 await Task.Yield();
             }
 
-            actor.transform.position = targetPosition;
+            actor.transform.localPosition = targetPosition;
 
             onFinish?.Invoke();
         }

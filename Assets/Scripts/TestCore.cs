@@ -7,13 +7,9 @@ using LocalGame = Game.Core.Game;
 public class TestCore : MonoBehaviour
 {
     [SerializeField] private UnityInputSystemHandler inputHandler;
+    [SerializeField] private VisualResolver visualResolver; // TODO: inject via Zenject
 
     [SerializeField] private Transform actorsPivot;
-    [SerializeField] private EntityActor heroActorPrefab;
-    [SerializeField] private EntityActor enemyActorPrefab;
-
-    [SerializeField] private EntityData heroData;
-    [SerializeField] private EntityData enemyData;
 
     [SerializeField] private LevelView levelView;
     [SerializeField] private LevelData levelData;
@@ -30,27 +26,35 @@ public class TestCore : MonoBehaviour
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        var hero = Create(-2, -2, 0, heroActorPrefab, heroData, playerAR);
-        var hero2 = Create(-1, -1, 0, heroActorPrefab, heroData, playerAR);
-        var enemy1 = Create(2, 2, 1, enemyActorPrefab, enemyData, enemyAR);
-        var enemy2 = Create(3, 3, 1, enemyActorPrefab, enemyData, enemyAR);
+        foreach (var entityPositionData in levelData.Entities)
+        {
+            var entityData = entityPositionData.entityData;
+            if (visualResolver.TryGet(entityData, out var actorPrefab))
+            {
+                var abilityResolver = GetResolver(entityData.Fraction, playerAR, enemyAR);
+                var entity = entityData.Create(maxId, entityPositionData.position, abilityResolver);
+                var actor = Instantiate(actorPrefab, actorsPivot, false);
+                actor.Init(entity);
+                level.Add(entity);
+                maxId++;
+            }
+            else
+            {
+                Debug.LogError($"Can't find actor for {entityData.name}");
+            }
+        }
 
-        level.Add(hero);
-        level.Add(hero2);
-        level.Add(enemy1);
-        level.Add(enemy2);
-
-        game = new LocalGame(level, hero);
+        game = new LocalGame(level);
         game.Start();
     }
 
-    private Entity Create(int x, int y, int fractionId, EntityActor actorPrefab, EntityData data, IAbilityResolver abilityResolver)
+    //TODO: IAbilityResolver to EntityData
+    private IAbilityResolver GetResolver(EntityFraction fraction, IAbilityResolver playerAR, IAbilityResolver enemyAR)
     {
-        var entity = data.Create(maxId, fractionId, x, y, abilityResolver);
-        var actor = Instantiate(actorPrefab, actorsPivot, false);
-        actor.Init(entity);
-        maxId++;
-        return entity;
+        if (fraction == EntityFraction.Player)
+            return playerAR;
+
+        return enemyAR;
     }
 
     private void OnDestroy()
