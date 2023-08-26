@@ -15,7 +15,7 @@ namespace Game.Visual
             Instance = this;
         }
 
-        public static Vector3 ToWorld(IntPoint gamePosition)
+        public static Vector3 ToLevelLocal(IntPoint gamePosition)
         {
             return new Vector3(gamePosition.X * Instance.GridScale, 0f, gamePosition.Y * Instance.GridScale);
         }

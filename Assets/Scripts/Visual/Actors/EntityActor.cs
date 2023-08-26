@@ -14,7 +14,7 @@ namespace Game.Visual
         public virtual void Init(Entity entity)
         {
             this.entity = entity;
-            transform.localPosition = VisualConfig.ToWorld(entity.Position);
+            transform.localPosition = VisualConfig.ToLevelLocal(entity.Position);
 
             entity.AbilityApplied += OnAbilityApplied;
             entity.StatsChanged += OnStatsChanged;

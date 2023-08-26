@@ -17,24 +17,26 @@ namespace Game.Visual
         {
             if (applyData.Ability is MeleeAttack ability && applyData.Data is Entity target)
             {
-                var initialPosition = actor.transform.position;
+                var initialPosition = actor.transform.localPosition;
                 DoPerform(
                     actor,
                     ability.Duration,
                     target.Position,
-                    () => actor.transform.position = initialPosition
+                    () => actor.transform.localPosition = initialPosition
                 );
                 DoFX(
                     (int)(ability.Duration * 1000f * impactVFXOffset),
-                    VisualConfig.ToWorld(target.Position)
+                    actor.transform.parent,
+                    VisualConfig.ToLevelLocal(target.Position)
                 );
             }
         }
 
-        private async void DoFX(int delayMs, Vector3 position)
+        private async void DoFX(int delayMs, Transform parent, Vector3 localPosition)
         {
             await Task.Delay(delayMs);
-            Instantiate(impactVFX, position, Quaternion.identity);
+            var instance = Instantiate(impactVFX, parent, false);
+            instance.transform.localPosition = localPosition;
         }
     }
 }

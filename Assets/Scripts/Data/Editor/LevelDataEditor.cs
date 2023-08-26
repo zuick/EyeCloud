@@ -89,7 +89,7 @@ namespace Game.Data
             var oldColor = GUI.backgroundColor;
 
             GUILayout.BeginVertical();
-            for (var i = 0; i < levelData.MapSize.Y; i++)
+            for (var i = levelData.MapSize.Y - 1; i >= 0; i--)
             {
                 GUILayout.BeginHorizontal();
                 for (var j = 0; j < levelData.MapSize.X; j++)

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using Game.Core;
 using Game.Data;
 using Game.Visual;
@@ -26,7 +27,9 @@ public class TestCore : MonoBehaviour
         var playerAR = new PlayerAbilityResolver(level, inputHandler);
         var enemyAR = new AIAbilityResolver(level);
 
-        foreach (var entityPositionData in levelData.Entities)
+        var orderedEntities = levelData.Entities.OrderByDescending(d => (int)d.entityData.Fraction);
+
+        foreach (var entityPositionData in orderedEntities)
         {
             var entityData = entityPositionData.entityData;
             if (visualResolver.TryGet(entityData, out var actorPrefab))
