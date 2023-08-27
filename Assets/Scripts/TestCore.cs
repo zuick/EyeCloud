@@ -6,6 +6,7 @@ using Game.Core;
 using Game.Data;
 using Game.Visual;
 using LocalGame = Game.Core.Game;
+using System.Collections.Generic;
 using System;
 
 public class TestCore : MonoBehaviour
@@ -13,12 +14,13 @@ public class TestCore : MonoBehaviour
     [SerializeField] private InputActionReference restartAction;
     [SerializeField] private UnityInputSystemHandler inputHandler;
     [SerializeField] private VisualResolver visualResolver; // TODO: inject via Zenject
-
+    [SerializeField] private TurnMarkerView turnMarkerView;
     [SerializeField] private Transform actorsPivot;
 
     [SerializeField] private LevelView levelView;
     [SerializeField] private LevelData levelData;
 
+    private Dictionary<Entity, EntityActor> actors = new();
     private LocalGame game;
     private int maxId;
 
@@ -41,6 +43,7 @@ public class TestCore : MonoBehaviour
                 var abilityResolver = GetResolver(entityData.Fraction, playerAR, enemyAR);
                 var entity = entityData.Create(maxId, entityPositionData.position, abilityResolver);
                 var actor = Instantiate(actorPrefab, actorsPivot, false);
+                actors.Add(entity, actor);
                 actor.Init(entity);
                 level.Add(entity);
                 maxId++;
@@ -52,6 +55,7 @@ public class TestCore : MonoBehaviour
         }
 
         game = new LocalGame(level);
+        game.CurrentEntityChanged += OnCurrentEntityChanged;
         game.Start();
 
         restartAction.action.performed += OnRestart;
@@ -71,9 +75,22 @@ public class TestCore : MonoBehaviour
         return enemyAR;
     }
 
+    private void OnCurrentEntityChanged(Entity current)
+    {
+        if (current.FractionId == (int)EntityFraction.Player && actors.TryGetValue(current, out var actor))
+        {
+            turnMarkerView.SetTarget(actor.transform);
+        }
+        else
+        {
+            turnMarkerView.SetTarget(null);
+        }
+    }
+
     private void OnDestroy()
     {
         game.Stop();
+        game.CurrentEntityChanged -= OnCurrentEntityChanged;
         restartAction.action.performed -= OnRestart;
     }
 }

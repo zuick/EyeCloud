@@ -48,7 +48,8 @@ namespace Game.Visual
 
         protected void RefreshScale()
         {
-            transform.localScale = Vector3.one * ((float)entity.Stats.HP / (float)entity.Stats.MaxHP);
+            var hpFullness = entity.Stats.MaxHP > 0 ? (float)entity.Stats.HP / (float)entity.Stats.MaxHP : 0f;
+            transform.localScale = Vector3.one * (0.5f + hpFullness * 0.5f);
         }
 
         protected virtual void OnDestroy()
