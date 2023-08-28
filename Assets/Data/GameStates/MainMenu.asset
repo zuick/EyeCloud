@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7286843f2d01e540bea437eb932e157, type: 3}
+  m_Name: MainMenu
+  m_EditorClassIdentifier: 
+  SceneName: MainMenu
+  SceneLoadMode: 0
+  isCursorVisible: 0
+  NextState: {fileID: 11400000, guid: 7f59bbad714d01a4eb52ada7e1a5473d, type: 2}
