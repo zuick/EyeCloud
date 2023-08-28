@@ -57,6 +57,11 @@ namespace Game.Core
             return ability != null;
         }
 
+        public bool HasAbility<T>() where T : IAbility
+        {
+            return abilities.Any(a => a is T);
+        }
+
         public void SetStats(EntityStats newValues)
         {
             var oldValues = Stats;

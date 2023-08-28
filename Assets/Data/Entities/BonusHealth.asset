@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BonusHealth
   m_EditorClassIdentifier: 
   Name: BonusHealth
-  Fraction: 0
+  Fraction: 2
   Abilities:
   - {fileID: 11400000, guid: f08ee989165540342a5b60bffb6dcf7e, type: 2}
   Stats:
@@ -21,3 +21,4 @@ MonoBehaviour:
     MaxHP: 100
     AttackMultiplier: 0
     SightDistance: 0
+  IsPlayable: 0

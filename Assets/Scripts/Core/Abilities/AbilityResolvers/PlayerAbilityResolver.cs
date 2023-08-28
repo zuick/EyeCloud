@@ -42,18 +42,18 @@ namespace Game.Core
 
                 if (entityAtTargetPosition != null)
                 {
-                    if (entity.FractionId != entityAtTargetPosition.FractionId)
-                    {
-                        if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
-                        {
-                            return new AbilityApplyData(attackAbility, entityAtTargetPosition);
-                        }
-                    }
-                    else
+                    if (entityAtTargetPosition.HasAbility<ProcessInteractionAbility>())
                     {
                         if (entity.TryGetAbility<Interact>(out var interactAbility))
                         {
                             return new AbilityApplyData(interactAbility, entityAtTargetPosition);
+                        }
+                    }
+                    else if (entity.FractionId != entityAtTargetPosition.FractionId)
+                    {
+                        if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
+                        {
+                            return new AbilityApplyData(attackAbility, entityAtTargetPosition);
                         }
                     }
                 }

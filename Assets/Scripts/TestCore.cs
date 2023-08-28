@@ -59,11 +59,23 @@ public class TestCore : MonoBehaviour
             }
         }
 
-        game = new LocalGame(level);
+        game = new LocalGame(level, (int)EntityFraction.Player);
         game.CurrentEntityChanged += OnCurrentEntityChanged;
+        game.PlayerWin += OnPlayerWin;
+        game.PlayerLose += OnPlayerLose;
         game.Start();
 
         restartAction.action.performed += OnRestart;
+    }
+
+    private void OnPlayerLose()
+    {
+        Debug.Log("LOSE");
+    }
+
+    private void OnPlayerWin()
+    {
+        Debug.Log("WIN");
     }
 
     private void OnRestart(InputAction.CallbackContext ctx)
@@ -96,6 +108,8 @@ public class TestCore : MonoBehaviour
     {
         game.Stop();
         game.CurrentEntityChanged -= OnCurrentEntityChanged;
+        game.PlayerLose -= OnPlayerLose;
+        game.PlayerWin -= OnPlayerWin;
         restartAction.action.performed -= OnRestart;
     }
 }

@@ -42,6 +42,16 @@ namespace Game.Core
                 .ForEach(Remove);
         }
 
+        public bool HasOppositeEntities(int fraction)
+        {
+            return Entities.Values.Any(e => e.FractionId != fraction);
+        }
+
+        public bool HasEntities(int fraction)
+        {
+            return Entities.Values.Any(e => e.FractionId == fraction);
+        }
+
         public Entity GetNext(Entity source)
         {
             var first = Entities.First().Value;

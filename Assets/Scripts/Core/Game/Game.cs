@@ -7,10 +7,13 @@ namespace Game.Core
     {
         public Level level;
         public Action<Entity> CurrentEntityChanged;
+        public Action PlayerWin;
+        public Action PlayerLose;
 
         private bool stopped;
+        private int playerFraction;
 
-        public Game(Level level)
+        public Game(Level level, int playerFraction)
         {
             this.level = level;
         }
@@ -25,6 +28,18 @@ namespace Game.Core
                 Debug.Log($"{currentEntity.Name}({currentEntity.Id}/{currentEntity.FractionId})?");
                 await currentEntity.NextAction();
                 level.RemoveDestroyed();
+
+                if (!level.HasOppositeEntities(playerFraction))
+                {
+                    PlayerWin?.Invoke();
+                    break;
+                }
+
+                if (!level.HasEntities(playerFraction))
+                {
+                    PlayerLose?.Invoke();
+                    break;
+                }
             }
         }
 
