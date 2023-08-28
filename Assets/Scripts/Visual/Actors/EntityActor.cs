@@ -8,7 +8,9 @@ namespace Game.Visual
     {
         public IntPoint EntityPosition => entity.Position;
         [SerializeField] private GameObject DestroyFX;
+        [SerializeField] private bool hpAffectToScale = true;
         [SerializeField] private VisualResolver visualResolver; // TODO: inject via Zenject
+
         private Entity entity;
 
         public virtual void Init(Entity entity)
@@ -48,8 +50,11 @@ namespace Game.Visual
 
         protected void RefreshScale()
         {
-            var hpFullness = entity.Stats.MaxHP > 0 ? (float)entity.Stats.HP / (float)entity.Stats.MaxHP : 0f;
-            transform.localScale = Vector3.one * (0.5f + hpFullness * 0.5f);
+            if (hpAffectToScale)
+            {
+                var hpFullness = entity.Stats.MaxHP > 0 ? (float)entity.Stats.HP / (float)entity.Stats.MaxHP : 0f;
+                transform.localScale = Vector3.one * (0.5f + hpFullness * 0.5f);
+            }
         }
 
         protected virtual void OnDestroy()

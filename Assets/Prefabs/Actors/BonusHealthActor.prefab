@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyFX: {fileID: 1946855342723310055, guid: fa29cadbbd14d43fba8d1512f771512c, type: 3}
+  hpAffectToScale: 0
   visualResolver: {fileID: 11400000, guid: 4e195a97af6ef4331b51dffb3b350615, type: 2}
 --- !u!1001 &8762316426119144050
 PrefabInstance:
@@ -58,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Food
       objectReference: {fileID: 0}
+    - target: {fileID: 2628129686039581682, guid: cffdd1fd0f91a8248a818ae07c857488, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a786675d1dd0d34429d4c76597b5d716, type: 2}
     - target: {fileID: 5677746945492666626, guid: cffdd1fd0f91a8248a818ae07c857488, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -143,3 +148,15 @@ MonoBehaviour:
   amplitude: 180
   period: 2
   reverse: 0
+--- !u!114 &6943136223047265382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084048328450080147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e840a15141afb4192b73f063c4987a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
