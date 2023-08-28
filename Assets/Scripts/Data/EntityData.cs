@@ -12,6 +12,7 @@ namespace Game.Data
         public EntityFraction Fraction;
         public List<Ability> Abilities;
         public EntityStats Stats;
+        public bool IsPlayable;
 
         public Entity Create(int id, IntPoint position, IAbilityResolver abilityResolver)
         {

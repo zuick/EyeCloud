@@ -21,6 +21,7 @@ public class TestCore : MonoBehaviour
     [SerializeField] private LevelData levelData;
 
     private Dictionary<Entity, EntityActor> actors = new();
+    private HashSet<Entity> playables = new();
     private LocalGame game;
     private int maxId;
 
@@ -40,9 +41,13 @@ public class TestCore : MonoBehaviour
             var entityData = entityPositionData.entityData;
             if (visualResolver.TryGet(entityData, out var actorPrefab))
             {
-                var abilityResolver = GetResolver(entityData.Fraction, playerAR, enemyAR);
+                var abilityResolver = GetResolver(entityData, playerAR, enemyAR);
                 var entity = entityData.Create(maxId, entityPositionData.position, abilityResolver);
                 var actor = Instantiate(actorPrefab, actorsPivot, false);
+
+                if (entityData.IsPlayable)
+                    playables.Add(entity);
+
                 actors.Add(entity, actor);
                 actor.Init(entity);
                 level.Add(entity);
@@ -67,9 +72,9 @@ public class TestCore : MonoBehaviour
     }
 
     //TODO: IAbilityResolver to EntityData
-    private IAbilityResolver GetResolver(EntityFraction fraction, IAbilityResolver playerAR, IAbilityResolver enemyAR)
+    private IAbilityResolver GetResolver(EntityData entityData, IAbilityResolver playerAR, IAbilityResolver enemyAR)
     {
-        if (fraction == EntityFraction.Player)
+        if (entityData.IsPlayable)
             return playerAR;
 
         return enemyAR;
@@ -77,7 +82,7 @@ public class TestCore : MonoBehaviour
 
     private void OnCurrentEntityChanged(Entity current)
     {
-        if (current.FractionId == (int)EntityFraction.Player && actors.TryGetValue(current, out var actor))
+        if (playables.Contains(current) && actors.TryGetValue(current, out var actor))
         {
             turnMarkerView.SetTarget(actor.transform);
         }

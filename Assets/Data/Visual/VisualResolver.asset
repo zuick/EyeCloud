@@ -19,6 +19,8 @@ MonoBehaviour:
     Visual: {fileID: 11400000, guid: fa365e8b7a71e42e286879e32a69d22c, type: 2}
   - Ability: {fileID: 11400000, guid: 42eb1c8741fae4578af0ecb1370e5e5d, type: 2}
     Visual: {fileID: 11400000, guid: 402cedb9dbd214423b74b4a02b810a90, type: 2}
+  - Ability: {fileID: 11400000, guid: 9dc696fb25a4f584fbdd60ca8ad5b8e5, type: 2}
+    Visual: {fileID: 11400000, guid: 79aa65331fa94b746964f38bd82fad25, type: 2}
   entityToActor:
   - Data: {fileID: 11400000, guid: eed505b81f8a44c37a4b4c6a8f6d8268, type: 2}
     Actor: {fileID: 8021202594414762322, guid: 79469128759c0487eb2516827a0ed379, type: 3}
