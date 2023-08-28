@@ -9,9 +9,12 @@ namespace Game.Visual
         public IntPoint EntityPosition => entity.Position;
         [SerializeField] private GameObject DestroyFX;
         [SerializeField] private bool hpAffectToScale = true;
+        [SerializeField] private bool showUI = true;
+        [SerializeField] private EntityUI entityUIPrefab;
         [SerializeField] private VisualResolver visualResolver; // TODO: inject via Zenject
 
         private Entity entity;
+        private EntityUI entityUI;
 
         public virtual void Init(Entity entity)
         {
@@ -21,7 +24,12 @@ namespace Game.Visual
             entity.AbilityApplied += OnAbilityApplied;
             entity.StatsChanged += OnStatsChanged;
 
-            RefreshScale();
+            if (showUI)
+            {
+                entityUI = Instantiate(entityUIPrefab, transform.position, entityUIPrefab.transform.rotation);
+            }
+
+            RefreshStats();
         }
 
         protected virtual void OnAbilityApplied(AbilityApplyData applyData)
@@ -37,7 +45,7 @@ namespace Game.Visual
 
         protected virtual void OnStatsChanged(EntityStats oldStats, EntityStats newStats)
         {
-            RefreshScale();
+            RefreshStats();
             if (entity.IsDestroyed)
             {
                 Destroy(gameObject);
@@ -45,6 +53,16 @@ namespace Game.Visual
                 {
                     Instantiate(DestroyFX, transform.position, transform.rotation);
                 }
+            }
+        }
+
+        protected virtual void RefreshStats()
+        {
+            RefreshScale();
+
+            if (entityUI != null)
+            {
+                entityUI.RefreshStats(entity.Stats);
             }
         }
 
@@ -61,6 +79,20 @@ namespace Game.Visual
         {
             entity.AbilityApplied -= OnAbilityApplied;
             entity.StatsChanged -= OnStatsChanged;
+
+            if (entityUI != null)
+            {
+                Destroy(entityUI.gameObject);
+            }
+        }
+
+
+        private void Update()
+        {
+            if (entityUI != null)
+            {
+                entityUI.RefreshPosition(transform.position);
+            }
         }
     }
 }
