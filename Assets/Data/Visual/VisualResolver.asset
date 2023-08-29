@@ -38,3 +38,5 @@ MonoBehaviour:
     Actor: {fileID: 4667431536346170936, guid: 1e62ba08e537c83499718be485725bca, type: 3}
   - Data: {fileID: 11400000, guid: 63b28725b52ce124a821df8e3db74baa, type: 2}
     Actor: {fileID: 4551660363855012317, guid: 6f271aeeb5168ef4f944f210ae203a5d, type: 3}
+  - Data: {fileID: 11400000, guid: 916594f37234ed6479f775e4d7240ce7, type: 2}
+    Actor: {fileID: 4968997939646216240, guid: fae4d8a7e5b6da6499d54905df0f15f3, type: 3}
