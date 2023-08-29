@@ -8,6 +8,7 @@ using Game.Data;
 using Game.Visual;
 using Game.Messages;
 using Game.Services;
+using Game.Audio;
 using LocalGame = Game.Core.Game;
 using System.Collections.Generic;
 using Zenject;
@@ -21,8 +22,8 @@ public class GameLevelController : MonoBehaviour
     [SerializeField] private Transform actorsPivot;
 
     [SerializeField] private LevelView levelView;
+    [Inject] private SoundManager soundManager;
 
-    [Inject] private IGameStatesService gameStatesService;
     private Dictionary<Entity, EntityActor> actors = new();
     private HashSet<Entity> playables = new();
     private LocalGame game;
@@ -87,16 +88,18 @@ public class GameLevelController : MonoBehaviour
     private void OnPlayerLose()
     {
         MessagesService.Publish(new PlayerFinishLevel(isWin: false));
+        soundManager.Play(SoundId.Defeat);
     }
 
     private void OnPlayerWin()
     {
         MessagesService.Publish(new PlayerFinishLevel(isWin: true));
+        soundManager.Play(SoundId.Success);
     }
 
     private void OnRestart(InputAction.CallbackContext ctx)
     {
-        MessagesService.Publish(new PlayerFinishLevel(isWin: false));
+        OnPlayerLose();
     }
 
     //TODO: IAbilityResolver to EntityData

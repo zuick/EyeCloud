@@ -23,3 +23,5 @@ MonoBehaviour:
     MaxHP: 100
     AttackMultiplier: 1
     SightDistance: 8
+    AttackDistance: 1
+  IsPlayable: 0

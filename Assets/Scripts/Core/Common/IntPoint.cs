@@ -27,6 +27,8 @@ namespace Game.Core
         public static IntPoint operator +(IntPoint a, IntPoint b) => new IntPoint(a.X + b.X, a.Y + b.Y);
         public static IntPoint operator -(IntPoint a, IntPoint b) => new IntPoint(a.X - b.X, a.Y - b.Y);
 
+        public IntPoint Normilized => new IntPoint(X == 0 ? 0 : X / Math.Abs(X), Y == 0 ? 0 : Y / Math.Abs(Y));
+
         public override string ToString()
         {
             return string.Format("{0}, {1}", X, Y);

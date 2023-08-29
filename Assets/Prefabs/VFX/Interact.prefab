@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8973026888765058342}
   - component: {fileID: 8973026888765058341}
   - component: {fileID: 8973026888765058340}
+  - component: {fileID: 4983080601426486854}
   m_Layer: 0
   m_Name: Interact
   m_TagString: Untagged
@@ -4870,3 +4871,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4983080601426486854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973026888765058347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f17fe239e3af1465aaf5264f61caf67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: 2
+  variants: 
+  playOnEnable: 1
+  playOnStart: 0
+  noSpatialBlend: 0
+  trackTransform: 0

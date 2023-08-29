@@ -11,7 +11,7 @@ namespace Game.State
         [SerializeField]
         private GameState NextState;
         [SerializeField]
-        private LevelData firstLevel;
+        private LevelsData levelsData;
 
         private MainMenuWindow mainMenuWindow;
         private ConfirmWindow exitWindow;
@@ -46,7 +46,7 @@ namespace Game.State
 
         private void OnStartGame()
         {
-            gameStatesService.Start(NextState, firstLevel);
+            gameStatesService.Start(NextState, levelsData.First);
         }
     }
 }

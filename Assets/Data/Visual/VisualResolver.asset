@@ -32,3 +32,5 @@ MonoBehaviour:
     Actor: {fileID: 4492499410923560211, guid: 330689ba7398f4b99a006d16ba0c0d7c, type: 3}
   - Data: {fileID: 11400000, guid: bef4a1b046cad4a5196f6e7bfd873831, type: 2}
     Actor: {fileID: 3114680093676579302, guid: 16fc9aa7da8ec45ff8b9a8df73074051, type: 3}
+  - Data: {fileID: 11400000, guid: 99d23ef19aefcd24abd4d77876b13c17, type: 2}
+    Actor: {fileID: 4667431536346170936, guid: 1e62ba08e537c83499718be485725bca, type: 3}

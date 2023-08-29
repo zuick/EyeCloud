@@ -57,13 +57,33 @@ namespace Game.Core
                         }
                     }
                 }
-                else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
+                else
                 {
-                    return new AbilityApplyData(moveToAbility, targetPosition);
+                    var entityAtTargetDirection = GetNearestAttackTarget(entity, delta);
+                    if (entityAtTargetDirection != null)
+                    {
+                        if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
+                        {
+                            return new AbilityApplyData(attackAbility, entityAtTargetDirection);
+                        }
+                    }
+                    else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
+                    {
+                        return new AbilityApplyData(moveToAbility, targetPosition);
+                    }
                 }
             }
 
             return GetPassAbility(entity);
+        }
+
+        private Entity GetNearestAttackTarget(Entity searcher, IntPoint delta)
+        {
+            return level.Get(
+                e => e.FractionId != searcher.FractionId &&
+                    (e.Position - searcher.Position).Normilized.Equals(delta) &&
+                    searcher.Position.MaxDistanceTo(e.Position) <= searcher.Stats.AttackDistance
+            );
         }
 
         private IntPoint GetPointFromInput()

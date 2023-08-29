@@ -35,6 +35,8 @@ namespace Game.Data
 
             DrawMap(levelData);
             DrawEntities(levelData);
+
+            levelData.Description = EditorGUILayout.TextArea(levelData.Description);
         }
 
         private void DrawEntities(LevelData levelData)

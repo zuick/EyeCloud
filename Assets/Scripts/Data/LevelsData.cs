@@ -21,5 +21,7 @@ namespace Game.Data
 
             return false;
         }
+
+        public LevelData First => levels.Length > 0 ? levels[0] : null;
     }
 }

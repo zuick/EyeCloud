@@ -22,6 +22,11 @@ namespace Game.State
         {
             gameHUD = uiSystem.WindowsService.Open<GameHUDWindow>();
             levelData = data as LevelData;
+
+            if (levelData != null)
+            {
+                gameHUD.SetLevelDescription(levelData.Description);
+            }
         }
 
         public override void OnEntered()

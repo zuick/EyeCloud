@@ -11,7 +11,7 @@ namespace Game.Data
         public IntPoint MapSize;
         public MapCellType[,] Map;
         public List<EnityPositionData> Entities = new();
-
+        public string Description;
         public List<MapCellList> mapSerialized;
 
         public void OnAfterDeserialize()

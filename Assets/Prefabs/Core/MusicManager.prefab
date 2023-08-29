@@ -58,7 +58,7 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 8f19b0046d239440984f4b04da87ea9e, type: 3}
     maxItems: 1
     id: 2
-  - clip: {fileID: 8300000, guid: dc096014daaef5e4882511fa4d908302, type: 3}
+  - clip: {fileID: 8300000, guid: 1ee4029a2a7c1a8458aeef2801b522a7, type: 3}
     maxItems: 1
     id: 1
   fadeOutDuration: 0.5

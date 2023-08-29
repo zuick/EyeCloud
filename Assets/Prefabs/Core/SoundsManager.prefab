@@ -54,4 +54,29 @@ MonoBehaviour:
   minDistance: 1
   maxDistance: 500
   spatialBlend: 0
-  Settings: []
+  Settings:
+  - clip: {fileID: 8300000, guid: 067511e8cf70c3d4da44a3c22ee55bc9, type: 3}
+    maxItems: 1
+    id: 1
+    loop: 0
+    backward: 0
+  - clip: {fileID: 8300000, guid: 94916fd98d3a199438bc36cbd1692d6f, type: 3}
+    maxItems: 1
+    id: 2
+    loop: 0
+    backward: 0
+  - clip: {fileID: 8300000, guid: 5027fca41024c72428a1addaff98e47c, type: 3}
+    maxItems: 1
+    id: 3
+    loop: 0
+    backward: 0
+  - clip: {fileID: 8300000, guid: 3cdae52c07f877944b7d30a5668f295a, type: 3}
+    maxItems: 1
+    id: 4
+    loop: 0
+    backward: 0
+  - clip: {fileID: 8300000, guid: 9d225b22b257bee4e93e49766941fcc6, type: 3}
+    maxItems: 1
+    id: 5
+    loop: 0
+    backward: 0
