@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: 02000000
-  stopPrevious: 1
-  stopOnDisable: 1
+  stopPrevious: 0
+  stopOnDisable: 0
 --- !u!1 &727950381
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +747,6 @@ MonoBehaviour:
   turnMarkerView: {fileID: 1446418891}
   actorsPivot: {fileID: 189219053}
   levelView: {fileID: 183008194}
-  levelData: {fileID: 11400000, guid: 87636a32de36740359ac7b708be4fbd4, type: 2}
 --- !u!4 &1552374572
 Transform:
   m_ObjectHideFlags: 0

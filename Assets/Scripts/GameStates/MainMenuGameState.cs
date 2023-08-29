@@ -1,7 +1,7 @@
 using UnityEngine;
 using Game.UI;
 using UnityEngine.InputSystem;
-using System;
+using Game.Data;
 
 namespace Game.State
 {
@@ -10,6 +10,8 @@ namespace Game.State
     {
         [SerializeField]
         private GameState NextState;
+        [SerializeField]
+        private LevelData firstLevel;
 
         private MainMenuWindow mainMenuWindow;
         private ConfirmWindow exitWindow;
@@ -44,7 +46,7 @@ namespace Game.State
 
         private void OnStartGame()
         {
-            gameStatesService.Start(NextState);
+            gameStatesService.Start(NextState, firstLevel);
         }
     }
 }

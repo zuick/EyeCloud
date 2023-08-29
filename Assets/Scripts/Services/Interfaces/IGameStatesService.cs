@@ -6,6 +6,6 @@ namespace Game.Services
     {
         GameState Current { get; }
         void Init(params GameState[] gameStates);
-        void Start(GameState gameState, object data = null);
+        void Start(GameState gameState, object data = null, bool forceReload = false);
     }
 }

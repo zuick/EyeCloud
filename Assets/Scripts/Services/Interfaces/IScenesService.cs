@@ -5,7 +5,7 @@ namespace Game.Services
 {
     public interface IScenesService
     {
-        Task LoadScene(string sceneName, LoadSceneMode mode);
+        Task LoadScene(string sceneName, LoadSceneMode mode, bool forceReload);
         Task UnloadScene(string sceneName);
         bool IsLoaded(string sceneName);
     }

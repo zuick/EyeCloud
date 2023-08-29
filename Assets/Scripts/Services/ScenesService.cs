@@ -5,9 +5,9 @@ namespace Game.Services
 {
     public class ScenesService : IScenesService
     {
-        public async Task LoadScene(string sceneName, LoadSceneMode mode)
+        public async Task LoadScene(string sceneName, LoadSceneMode mode, bool forceReload = false)
         {
-            if (IsLoaded(sceneName))
+            if (!forceReload && IsLoaded(sceneName))
             {
                 return;
             }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Game.State;
 using PlayerInput = Game.Input.PlayerInput;
+using System.Threading.Tasks;
 
 namespace Game.Services
 {
@@ -28,7 +29,7 @@ namespace Game.Services
             }
         }
 
-        public async void Start(GameState gameState, object data = null)
+        public async void Start(GameState gameState, object data = null, bool forceReload = false)
         {
             if (Current != null)
             {
@@ -46,7 +47,7 @@ namespace Game.Services
 
             Cursor.visible = gameState.isCursorVisible;
             gameState.OnStartEnter(data);
-            await scenesService.LoadScene(gameState.SceneName, gameState.SceneLoadMode);
+            await scenesService.LoadScene(gameState.SceneName, gameState.SceneLoadMode, forceReload);
             await gameState.ProcessEnter();
             gameState.OnEntered();
             await uiSystem.FaderService.FadeOut();

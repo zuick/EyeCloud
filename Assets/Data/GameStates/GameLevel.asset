@@ -16,3 +16,4 @@ MonoBehaviour:
   SceneLoadMode: 0
   isCursorVisible: 0
   MainMenuGameState: {fileID: 11400000, guid: fe31434b106516a4d896eac6124da408, type: 2}
+  levelsData: {fileID: 11400000, guid: ef8ee42dc4f718f4289da58860fd9cfe, type: 2}

@@ -16,3 +16,4 @@ MonoBehaviour:
   SceneLoadMode: 0
   isCursorVisible: 0
   NextState: {fileID: 11400000, guid: 7f59bbad714d01a4eb52ada7e1a5473d, type: 2}
+  firstLevel: {fileID: 11400000, guid: 87636a32de36740359ac7b708be4fbd4, type: 2}

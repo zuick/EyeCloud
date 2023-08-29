@@ -2,14 +2,17 @@
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UniRx;
 using Game.Core;
 using Game.Data;
 using Game.Visual;
+using Game.Messages;
+using Game.Services;
 using LocalGame = Game.Core.Game;
 using System.Collections.Generic;
-using System;
+using Zenject;
 
-public class TestCore : MonoBehaviour
+public class GameLevelController : MonoBehaviour
 {
     [SerializeField] private InputActionReference restartAction;
     [SerializeField] private UnityInputSystemHandler inputHandler;
@@ -18,14 +21,27 @@ public class TestCore : MonoBehaviour
     [SerializeField] private Transform actorsPivot;
 
     [SerializeField] private LevelView levelView;
-    [SerializeField] private LevelData levelData;
 
+    [Inject] private IGameStatesService gameStatesService;
     private Dictionary<Entity, EntityActor> actors = new();
     private HashSet<Entity> playables = new();
     private LocalGame game;
     private int maxId;
 
-    public void Start()
+    private void Awake()
+    {
+        MessagesService
+            .Subscribe<StartLevelMessage>(OnStartLevelMessage)
+            .AddTo(this);
+    }
+
+    private void OnStartLevelMessage(StartLevelMessage e)
+    {
+        if (e.LevelData != null)
+            Init(e.LevelData);
+    }
+
+    private void Init(LevelData levelData)
     {
         levelView.Init(levelData);
 
@@ -59,7 +75,7 @@ public class TestCore : MonoBehaviour
             }
         }
 
-        game = new LocalGame(level, (int)EntityFraction.Player);
+        game = new LocalGame(level, (int)EntityFraction.Player, (int)EntityFraction.Enemy);
         game.CurrentEntityChanged += OnCurrentEntityChanged;
         game.PlayerWin += OnPlayerWin;
         game.PlayerLose += OnPlayerLose;
@@ -70,17 +86,17 @@ public class TestCore : MonoBehaviour
 
     private void OnPlayerLose()
     {
-        Debug.Log("LOSE");
+        MessagesService.Publish(new PlayerFinishLevel(isWin: false));
     }
 
     private void OnPlayerWin()
     {
-        Debug.Log("WIN");
+        MessagesService.Publish(new PlayerFinishLevel(isWin: true));
     }
 
     private void OnRestart(InputAction.CallbackContext ctx)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        MessagesService.Publish(new PlayerFinishLevel(isWin: false));
     }
 
     //TODO: IAbilityResolver to EntityData
