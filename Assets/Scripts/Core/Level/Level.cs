@@ -74,7 +74,7 @@ namespace Game.Core
 
         public Entity GetAt(IntPoint position)
         {
-            return Entities.Values.FirstOrDefault(e => e.Position.Equals(position));
+            return Entities.Values.FirstOrDefault(e => e.Position.Equals(position) && !e.Stats.IsInvisible);
         }
 
         public bool IsFree(IntPoint position)
@@ -104,9 +104,22 @@ namespace Game.Core
             return positionsAround.Where(IsFree).ToArray();
         }
 
+        public IntPoint GetRandomPosition()
+        {
+            IntPoint candidate;
+            do
+            {
+                var rx = UnityEngine.Random.Range(0, map.GetLength(0));
+                var ry = UnityEngine.Random.Range(0, map.GetLength(1));
+                candidate = new IntPoint(rx, ry);
+            } while (!IsFree(candidate));
+
+            return candidate;
+        }
+
         public Entity Get(Func<Entity, bool> predicate)
         {
-            return Entities.Values.FirstOrDefault(predicate);
+            return Entities.Values.Where(e => !e.Stats.IsInvisible).FirstOrDefault(predicate);
         }
     }
 }

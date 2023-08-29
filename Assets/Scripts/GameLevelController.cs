@@ -12,6 +12,7 @@ using Game.Audio;
 using LocalGame = Game.Core.Game;
 using System.Collections.Generic;
 using Zenject;
+using System;
 
 public class GameLevelController : MonoBehaviour
 {
@@ -28,12 +29,25 @@ public class GameLevelController : MonoBehaviour
     private HashSet<Entity> playables = new();
     private LocalGame game;
     private int maxId;
+    private Level level;
+    private PlayerAbilityResolver playerAR;
+    private AIAbilityResolver enemyAR;
+    private SpawnerAbilityResolver spawnerAR;
 
     private void Awake()
     {
         MessagesService
             .Subscribe<StartLevelMessage>(OnStartLevelMessage)
             .AddTo(this);
+
+        MessagesService
+            .Subscribe<SpawnEntityMessage>(OnSpawnEntityMessage)
+            .AddTo(this);
+    }
+
+    private void OnSpawnEntityMessage(SpawnEntityMessage e)
+    {
+        SpawnEntity(e.EntityData, e.Position);
     }
 
     private void OnStartLevelMessage(StartLevelMessage e)
@@ -46,43 +60,48 @@ public class GameLevelController : MonoBehaviour
     {
         levelView.Init(levelData);
 
-        var level = new Level(levelData.Map);
+        level = new Level(levelData.Map);
 
-        var playerAR = new PlayerAbilityResolver(level, inputHandler);
-        var enemyAR = new AIAbilityResolver(level);
+        playerAR = new PlayerAbilityResolver(level, inputHandler);
+        enemyAR = new AIAbilityResolver(level);
+        spawnerAR = new SpawnerAbilityResolver(level);
 
         var orderedEntities = levelData.Entities.OrderBy(d => (int)d.entityData.Fraction);
 
         foreach (var entityPositionData in orderedEntities)
         {
-            var entityData = entityPositionData.entityData;
-            if (visualResolver.TryGet(entityData, out var actorPrefab))
-            {
-                var abilityResolver = GetResolver(entityData, playerAR, enemyAR);
-                var entity = entityData.Create(maxId, entityPositionData.position, abilityResolver);
-                var actor = Instantiate(actorPrefab, actorsPivot, false);
-
-                if (entityData.IsPlayable)
-                    playables.Add(entity);
-
-                actors.Add(entity, actor);
-                actor.Init(entity);
-                level.Add(entity);
-                maxId++;
-            }
-            else
-            {
-                Debug.LogError($"Can't find actor for {entityData.name}");
-            }
+            SpawnEntity(entityPositionData.entityData, entityPositionData.position);
         }
 
-        game = new LocalGame(level, (int)EntityFraction.Player, (int)EntityFraction.Enemy);
+        game = new LocalGame(level, (int)EntityFraction.Player, (int)EntityFraction.Enemy, (int)EntityFraction.Spawner);
         game.CurrentEntityChanged += OnCurrentEntityChanged;
         game.PlayerWin += OnPlayerWin;
         game.PlayerLose += OnPlayerLose;
         game.Start();
 
         restartAction.action.performed += OnRestart;
+    }
+
+    private void SpawnEntity(EntityData entityData, IntPoint position)
+    {
+        var abilityResolver = GetResolver(entityData);
+        if (visualResolver.TryGet(entityData, out var actorPrefab))
+        {
+            var entity = entityData.Create(maxId, position, abilityResolver);
+            var actor = Instantiate(actorPrefab, actorsPivot, false);
+
+            if (entityData.IsPlayable)
+                playables.Add(entity);
+
+            actors.Add(entity, actor);
+            actor.Init(entity);
+            level.Add(entity);
+            maxId++;
+        }
+        else
+        {
+            Debug.LogError($"Can't find actor for {entityData.name}");
+        }
     }
 
     private void OnPlayerLose()
@@ -103,10 +122,12 @@ public class GameLevelController : MonoBehaviour
     }
 
     //TODO: IAbilityResolver to EntityData
-    private IAbilityResolver GetResolver(EntityData entityData, IAbilityResolver playerAR, IAbilityResolver enemyAR)
+    private IAbilityResolver GetResolver(EntityData entityData)
     {
         if (entityData.IsPlayable)
             return playerAR;
+        else if (entityData.Fraction == EntityFraction.Spawner)
+            return spawnerAR;
 
         return enemyAR;
     }

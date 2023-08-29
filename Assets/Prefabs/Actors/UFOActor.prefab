@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8567756771557477038}
+  - component: {fileID: 4551660363855012317}
   m_Layer: 0
   m_Name: UFOActor
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8279371654625394333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28762937, y: 1.8317993, z: -0.2809146}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33,6 +34,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4551660363855012317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8279371654625394333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e14d6c4b2a94eaabba1794a278ab82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyFX: {fileID: 1946855342723310055, guid: fa29cadbbd14d43fba8d1512f771512c, type: 3}
+  hpAffectToScale: 0
+  showUI: 0
+  entityUIPrefab: {fileID: 3767707646291051232, guid: 741cb45e26bd8354ea55c8e714375dc1, type: 3}
+  visualResolver: {fileID: 11400000, guid: 4e195a97af6ef4331b51dffb3b350615, type: 2}
 --- !u!1001 &7576312238674426271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,15 +76,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 52b56556974823142a72a7253b5801e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.28762937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 52b56556974823142a72a7253b5801e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8937993
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 52b56556974823142a72a7253b5801e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2809146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 52b56556974823142a72a7253b5801e4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -149,15 +167,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123940524436369172, guid: fa552432884a0af49ac019108c5db148, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.28762937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8123940524436369172, guid: fa552432884a0af49ac019108c5db148, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16820073
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8123940524436369172, guid: fa552432884a0af49ac019108c5db148, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2809146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8123940524436369172, guid: fa552432884a0af49ac019108c5db148, type: 3}
       propertyPath: m_LocalRotation.w
@@ -199,6 +217,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1183463085232969014, guid: fa552432884a0af49ac019108c5db148, type: 3}
   m_PrefabInstance: {fileID: 7576312239568677298}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2078225769205494321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739506315421170820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e840a15141afb4192b73f063c4987a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2078225769205494326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,15 +246,3 @@ MonoBehaviour:
   amplitude: 360
   period: 16
   reverse: 0
---- !u!114 &2078225769205494321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8739506315421170820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e840a15141afb4192b73f063c4987a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -5,6 +5,7 @@ namespace Game.Data
     {
         Player = 0,
         Enemy = 1,
-        Neutral = 2
+        Neutral = 2,
+        Spawner = 3
     }
 }

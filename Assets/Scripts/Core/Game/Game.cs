@@ -13,12 +13,14 @@ namespace Game.Core
         private bool stopped;
         private int playerFraction;
         private int enemyFraction;
+        private int spawnerFraction;
 
-        public Game(Level level, int playerFraction, int enemyFraction)
+        public Game(Level level, int playerFraction, int enemyFraction, int spawnerFraction)
         {
             this.level = level;
             this.playerFraction = playerFraction;
             this.enemyFraction = enemyFraction;
+            this.spawnerFraction = spawnerFraction;
         }
 
         public async void Start()
@@ -32,7 +34,7 @@ namespace Game.Core
                 await currentEntity.NextAction();
                 level.RemoveDestroyed();
 
-                if (!level.HasEntities(enemyFraction))
+                if (!level.HasEntities(enemyFraction) && !level.HasEntities(spawnerFraction))
                 {
                     PlayerWin?.Invoke();
                     break;

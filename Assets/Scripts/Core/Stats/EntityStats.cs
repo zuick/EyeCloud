@@ -10,6 +10,7 @@ namespace Game.Core
         public float AttackMultiplier;
         public int SightDistance;
         public int AttackDistance;
+        public bool IsInvisible;
 
         public static EntityStats operator +(EntityStats a, EntityStats b) => new EntityStats()
         {
@@ -17,7 +18,8 @@ namespace Game.Core
             MaxHP = a.MaxHP + b.MaxHP,
             AttackMultiplier = a.AttackMultiplier + b.AttackMultiplier,
             SightDistance = a.SightDistance + b.SightDistance,
-            AttackDistance = a.AttackDistance + b.AttackDistance
+            AttackDistance = a.AttackDistance + b.AttackDistance,
+            IsInvisible = a.IsInvisible
         };
 
         public static EntityStats operator -(EntityStats a, EntityStats b) => new EntityStats()
@@ -26,7 +28,8 @@ namespace Game.Core
             MaxHP = a.MaxHP - b.MaxHP,
             AttackMultiplier = a.AttackMultiplier - b.AttackMultiplier,
             SightDistance = a.SightDistance - b.SightDistance,
-            AttackDistance = a.AttackDistance - b.AttackDistance
+            AttackDistance = a.AttackDistance - b.AttackDistance,
+            IsInvisible = a.IsInvisible
         };
 
         public static EntityStats Empty => new EntityStats()
