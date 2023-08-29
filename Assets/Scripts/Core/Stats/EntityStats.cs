@@ -11,6 +11,7 @@ namespace Game.Core
         public int SightDistance;
         public int AttackDistance;
         public bool IsInvisible;
+        public bool IsEnergySpawner;
 
         public static EntityStats operator +(EntityStats a, EntityStats b) => new EntityStats()
         {
@@ -19,7 +20,8 @@ namespace Game.Core
             AttackMultiplier = a.AttackMultiplier + b.AttackMultiplier,
             SightDistance = a.SightDistance + b.SightDistance,
             AttackDistance = a.AttackDistance + b.AttackDistance,
-            IsInvisible = a.IsInvisible
+            IsInvisible = a.IsInvisible,
+            IsEnergySpawner = a.IsEnergySpawner
         };
 
         public static EntityStats operator -(EntityStats a, EntityStats b) => new EntityStats()
@@ -29,7 +31,8 @@ namespace Game.Core
             AttackMultiplier = a.AttackMultiplier - b.AttackMultiplier,
             SightDistance = a.SightDistance - b.SightDistance,
             AttackDistance = a.AttackDistance - b.AttackDistance,
-            IsInvisible = a.IsInvisible
+            IsInvisible = a.IsInvisible,
+            IsEnergySpawner = a.IsEnergySpawner
         };
 
         public static EntityStats Empty => new EntityStats()

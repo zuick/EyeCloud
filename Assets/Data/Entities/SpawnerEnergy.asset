@@ -22,4 +22,5 @@ MonoBehaviour:
     SightDistance: 0
     AttackDistance: 0
     IsInvisible: 0
+    IsEnergySpawner: 1
   IsPlayable: 0

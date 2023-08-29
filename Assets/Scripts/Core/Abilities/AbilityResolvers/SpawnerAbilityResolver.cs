@@ -25,18 +25,25 @@ namespace Game.Core
                 stateTick = 0;
             }
 
-            if (stateTick == moveOnTick)
+            if (level.Get(e => e.Stats.IsEnergySpawner) == null)
             {
-                if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
-                {
-                    return new AbilityApplyData(moveToAbility, level.GetRandomPosition());
-                }
+                entity.SetStats(EntityStats.Empty);
             }
-            else if (stateTick == spawnOnTick)
+            else
             {
-                if (entity.TryGetAbility<SpawnEntity>(out var spawnAbility))
+                if (stateTick == moveOnTick)
                 {
-                    return new AbilityApplyData(spawnAbility, entity.Position);
+                    if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
+                    {
+                        return new AbilityApplyData(moveToAbility, level.GetRandomPosition());
+                    }
+                }
+                else if (stateTick == spawnOnTick)
+                {
+                    if (entity.TryGetAbility<SpawnEntity>(out var spawnAbility))
+                    {
+                        return new AbilityApplyData(spawnAbility, entity.Position);
+                    }
                 }
             }
 
