@@ -40,32 +40,16 @@ namespace Game.Core
 
                 var entityAtTargetPosition = level.GetAt(targetPosition);
 
-                if (entityAtTargetPosition != null)
+                if (TryInteractWith(entity, entityAtTargetPosition, false, out var abilityApplyData))
                 {
-                    if (entityAtTargetPosition.HasAbility<ProcessInteractionAbility>())
-                    {
-                        if (entity.TryGetAbility<Interact>(out var interactAbility))
-                        {
-                            return new AbilityApplyData(interactAbility, entityAtTargetPosition);
-                        }
-                    }
-                    else if (entity.FractionId != entityAtTargetPosition.FractionId)
-                    {
-                        if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
-                        {
-                            return new AbilityApplyData(attackAbility, entityAtTargetPosition);
-                        }
-                    }
+                    return abilityApplyData;
                 }
                 else
                 {
                     var entityAtTargetDirection = GetNearestAttackTarget(entity, delta);
-                    if (entityAtTargetDirection != null)
+                    if (TryInteractWith(entity, entityAtTargetDirection, true, out var otherAbilityApplyData))
                     {
-                        if (entity.TryGetAbility<MeleeAttack>(out var attackAbility))
-                        {
-                            return new AbilityApplyData(attackAbility, entityAtTargetDirection);
-                        }
+                        return otherAbilityApplyData;
                     }
                     else if (entity.TryGetAbility<MoveTo>(out var moveToAbility))
                     {
@@ -75,6 +59,33 @@ namespace Game.Core
             }
 
             return GetPassAbility(entity);
+        }
+
+        private bool TryInteractWith(Entity owner, Entity target, bool passInteraction, out AbilityApplyData abilityApplyData)
+        {
+            abilityApplyData = AbilityApplyData.Empty;
+
+            if (target != null)
+            {
+                if (target.HasAbility<ProcessInteractionAbility>())
+                {
+                    if (!passInteraction && owner.TryGetAbility<Interact>(out var interactAbility))
+                    {
+                        abilityApplyData = new AbilityApplyData(interactAbility, target);
+                        return true;
+                    }
+                }
+                else if (owner.FractionId != target.FractionId)
+                {
+                    if (owner.TryGetAbility<MeleeAttack>(out var attackAbility))
+                    {
+                        abilityApplyData = new AbilityApplyData(attackAbility, target);
+                        return true;
+                    }
+                }
+
+            }
+            return false;
         }
 
         private Entity GetNearestAttackTarget(Entity searcher, IntPoint delta)
